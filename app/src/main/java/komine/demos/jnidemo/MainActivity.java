@@ -2,6 +2,7 @@ package komine.demos.jnidemo;
 
 import android.graphics.Point;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -22,7 +23,8 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mPerson = new Person("miku",16);
+        Point point = createPoint(39,39);
+        Log.d(mName,"x = " + point.x + ",y = " + point.y);
 
         alert();
         Toast.makeText(getApplicationContext(),"name:" + getName(),Toast.LENGTH_SHORT).show();
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity{
 
     public native String getName();
     public native void alert();
+    public native Point createPoint(int x,int y);
 
     public void showName(View view) {
         Toast.makeText(getApplicationContext(),mPerson.getName(),Toast.LENGTH_SHORT).show();

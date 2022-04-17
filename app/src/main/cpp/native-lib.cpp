@@ -78,3 +78,22 @@ Java_komine_demos_jnidemo_Person_setAge(JNIEnv *env, jobject thiz, jlong m_nativ
    Person *p = reinterpret_cast<Person *>(m_native_object);
    p->setAge(age);
 }
+
+
+extern "C"
+JNIEXPORT jobject JNICALL
+Java_komine_demos_jnidemo_MainActivity_createPoint(JNIEnv *env, jobject thiz, jint x, jint y) {
+    //3.获取Java对象的class
+    jclass pointClass = env->FindClass("android/graphics/Point");
+
+    //2.获取构造函数方法签名
+    jmethodID initMethodId = env->GetMethodID(pointClass,"<init>", "(II)V");
+
+    //1.调用JNIEnv的NewObject()方法创建一个Java对象
+    jobject pointObj = env->NewObject(pointClass,initMethodId,x,y);
+
+    jobject  p = env->AllocObject(pointClass);
+
+    //4.返回创建好的对象
+    return pointObj;
+}
